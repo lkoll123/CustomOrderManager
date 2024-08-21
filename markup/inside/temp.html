@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <meta name="author" content="Luka Koll"/>
+        <meta name="author" content="Daniel Fritsch" />
+        <meta name="description" content="Landing Page" />
+
+        <title>Landing Screen</title>
+
+        <link rel="icon" href="" type="image/x-icon" />
+        <link rel="stylesheet" href="../../stylesheet/landingScreen.css" type="text/css" />
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet" />
+
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+        <script src="/Applications/XAMPP/xamppfiles/htdocs/Daniel_Summer_Proj_2024/js/landingScreen.js"></script>
+    </head>
+
+    <body>
+        <div class="sidebar">
+            <div class="top">
+                <div class=""logo>
+                    <i class="bx bxl-codepen"></i>
+                    <span>Mirai Solutions</span>
+                    <i class="bx bx-menu" id="btn"></i>
+                    <img src="../../images/logo-no-background.png" alt="User Image" class="user-img">
+
+                </div>
+            </div>
+            <div class="user">
+
+            </div>
+            <ul></ul>
+
+        </div>
+        
+                
+
+        <?php if (isset($_SESSION["user_id"])): ?>
+            <h1> Welcome, <?= htmlspecialchars($user["first_name"]) ?> !</h1>
+
+            <p><a href="../logout.php">Log Out</a></p>
+        <?php else: ?>
+            <a href="../signup.html"> Sign Up</a>
+        <?php endif; ?>
+
+        
+
+    </body>
+
+</html>

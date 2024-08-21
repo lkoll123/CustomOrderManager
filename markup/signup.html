@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+
+        <meta name="author" content="Luka Koll"/>
+        <meta name="author" content="Daniel Fritsch" />
+        <meta name="description" content="Sign Up Sheet" />
+
+        <title>SignUp</title>
+
+        <link rel="icon" href="" type="image/x-icon" />
+        <link rel="stylesheet" href="../stylesheet/style.css" type="text/css" />
+
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/just-validate@latest/dist/just-validate.production.min.js" defer></script>
+        <script type="text/javascript" src="../js/signup.js" defer></script>
+    </head>
+    <body id="signupSheet">
+        
+        <form action="process-signup.php" method="post" id="signup" novalidate>
+            <fieldset>
+                <h1>Sign Up</h1>
+
+                <div class="inputLabel">
+                    <label for="firstName">First Name: </label>
+                    <input id="firstName" name="firstName" type="text" required autocomplete="on" placeholder="enter here"> 
+                </div>
+
+                <div class="inputLabel">
+                    <label for="lastName">Last Name: </label>
+                    <input id="lastName" name="lastName" type="text" required autocomplete="on" placeholder="enter here">
+                </div>
+
+                <div class="inputLabel">
+                    <label for="email">Email: </label>
+                    <input id="email" name="email" type="email" required autocomplete="on" placeholder="enter here">  
+                </div>
+
+                <div class="inputLabel">
+                    <label for="passWord">Password: </label>
+                    <input id="passWord" name="passWord" type="password" required autocomplete="on" placeholder="enter here">  
+                </div>
+
+                <div class="inputLabel">
+                    <label for="confirm_password">Re-enter Password: </label>
+                    <input id="confirm_password" name="confirm_password" type="password" required autocomplete="on" placeholder="enter here"> 
+                </div>
+
+                <button type="submit">Sign Up</button>
+            </fieldset>
+        </form>
+
+        <h4>Already have an account? Log in <a href="login.php">here</a>!</h4>
+        
+    </body>
+</html>

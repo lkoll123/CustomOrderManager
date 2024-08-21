@@ -1,0 +1,164 @@
+
+
+a {
+    color: rgba(255, 255, 255, 1);
+}
+
+
+fieldset {
+
+    input, input:-webkit-autofill {
+        width: 80%;
+        align-items: right;
+        display:block;
+
+
+        background: rgba(0, 0, 0, 0);
+
+        border: 2px solid white;
+        padding: 5px;
+        margin: 5px 5px 5px 5px;
+
+        border-radius: 30px;
+
+        color: white;
+    }
+
+    
+
+    input::placeholder {
+        font-family: 'Futura', Sans-serif;
+        color: white;
+
+        opacity: 0.6; 
+    }
+
+    input:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    
+
+    button {
+        background: rgba(0, 0, 0, 0);
+        border: 2px solid white;
+        border-radius: 30px;
+        padding: 5px;
+
+        margin: 10px 10px 10px 10px;
+
+        color: white;
+        font-family: 'Futura', Sans-serif;
+        
+    }
+
+
+
+    legend {
+        font-size: 50px;
+        
+    }
+
+    .inputLabel {
+        display: block;
+        padding: 10px;
+
+        
+
+        
+    }
+
+    overflow: scroll;
+
+    
+    filter: drop-shadow(10px 10px 4px rgba(68, 65, 65, 0.6));
+    border-color: rgba(68, 65, 65, 0.6);
+
+    text-align: left;
+
+    border-radius: 10px;
+
+    background: #1A093D;
+
+
+}
+
+#signupSheet, #loginSheet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+    
+    background-image: url('../images/background_option3.jpeg');
+    background-size: cover;
+    background-repeat: repeat;
+    overflow: scroll;
+
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+
+    font-family: 'Futura', Sans-serif;
+    color: white;
+    
+
+    
+    
+}
+
+#signupSuccess {
+    background-image: url('../images/background_option3.jpeg');
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100vw;
+    height: 100vh;
+}
+
+.success-message {
+    overflow: scroll;
+
+    
+    filter: drop-shadow(10px 10px 4px rgba(68, 65, 65, 0.6));
+    border-color: rgba(68, 65, 65, 0.6);
+
+    text-align: left;
+
+    border-radius: 10px;
+
+    background: #1A093D;
+
+    font-family: 'Futura', Sans-serif;
+    color: white;
+
+}
+
+.success-message h2, h4 {
+    margin: 20px 20px;
+}
+ 
+
+
+
+
+@media only screen and (max-width: 800px) {
+    form, .success-message {
+        
+        width: 75%;
+        
+    }
+}
+
+@media only screen and (min-width: 800px) {
+    form, .success-message {
+        
+        width: 600px;
+        
+    }
+}
+

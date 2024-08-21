@@ -1,0 +1,192 @@
+.main-content .title-section {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: auto;
+    height: 100px;
+
+    width: 100%;
+}
+
+
+#headImage {
+    width: 60px;
+    display: inline-block;
+    margin: 30px 30px;
+}
+
+.title-section h1 {
+    display: inline-block;
+    color: White;
+}
+
+hr {
+    color: White;
+}
+
+
+
+
+@media only screen and (max-width: 800px) {
+    #headImage {
+        width: 40px;
+        margin: 15px 15px;
+    }
+}
+
+.body-section {
+    height: 100vh;
+    width: 100%;
+    overflow: scroll;
+    background-image: url('../images/background_option3.jpeg');
+    background-size: cover;
+    background-repeat: repeat;
+
+}
+
+.react {
+    color: red;
+    font-size: 12px;
+    font-family: 'Futura', Sans-serif;
+    margin-left: 5px;
+}
+
+
+input {
+    width: 80%;
+    align-items: right;
+    display:block;
+
+
+    background: rgba(0, 0, 0, 0);
+
+    border: 2px solid white;
+    padding: 5px;
+    margin: 5px 5px 5px 5px;
+
+    border-radius: 30px;
+
+    color: white;
+}
+
+
+button {
+    background: rgba(0, 0, 0, 0);
+    border: 2px solid white;
+    border-radius: 30px;
+    padding: 5px;
+
+    margin: 10px 10px 10px 10px;
+
+    color: white;
+    font-family: 'Futura', Sans-serif;
+    
+}
+
+input::placeholder {
+    
+    color: white;
+
+    opacity: 0.6; 
+}
+
+input:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.input-label {
+    color: White;
+    display: block;
+    padding: 15px 10px;
+}
+
+.personal-section {
+    margin: 50px 120px;
+    width: 45%;
+    height: 435px;
+
+    background-color: #1A093D;
+    border-color:  rgba(68, 65, 65, 0.6);
+    border-radius: 10px;
+    filter: drop-shadow(10px 10px 4px rgba(68, 65, 65, 0.6));
+    font-family: 'Futura', Sans-serif;
+    
+}
+
+.company-section {
+    margin: 50px 120px;
+    width: 45%;
+    height: 435px;
+
+    background-color: #1A093D;
+    border-color:  rgba(68, 65, 65, 0.6);
+    border-radius: 10px;
+    filter: drop-shadow(10px 10px 4px rgba(68, 65, 65, 0.6));
+    font-family: 'Futura', Sans-serif;
+}
+
+
+
+@media only screen and (max-width: 800px) {
+
+    .personal-section, .company-section {
+        margin: 50px 7%;
+        width: 85%
+    }
+}
+
+.company-edit, .company-create {
+    width: 45%;
+    height: 450px;
+
+    background-color: #1A093D;
+    border-color:  rgba(68, 65, 65, 0.6);
+    border-radius: 10px;
+    filter: drop-shadow(10px 10px 4px rgba(68, 65, 65, 0.6));
+    font-family: 'Futura', Sans-serif;
+
+    position: abolute;
+    left: 20%;
+    top: 20%;
+    
+}
+
+#company-edit-close, #company-create-close, #company-select-close {
+    color: rgb(236, 83, 83);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 28px;
+    border-radius: 1.5rem;
+
+
+}
+
+#fineprint {
+    display: block;
+    margin-left: 10px;
+
+    color: White;
+    font-family: 'Futura', Sans-serif;
+
+    font-size: 12px;
+
+}
+
+
+.company-edit::backdrop {
+    background: rgba(68, 65, 65, 0.6);
+}
+
+.company-create::backdrop {
+    background: rgba(68, 65, 65, 0.6);
+}
+
+@media only screen and (min-width: 800px) and (max-width: 1000px){
+    
+    .personal-section, .company-section {
+        width: 80%
+    }
+}
+
+
