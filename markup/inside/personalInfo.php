@@ -56,10 +56,9 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 'true') {
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcryptjs/2.4.3/bcrypt.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
 
-    
     <script type="text/babel" src="../../js/personalInfo_client.js"></script>
     
     
@@ -115,12 +114,14 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 'true') {
                         <input name="phoneNumber" type="text" placeholder="<?= htmlspecialchars($user["phone_number"] ?? "Phone Number") ?>" required>
                     </p>
                     <div class="react personal-error"></div>
+                    <div class="react personal-success"></div>
                     <button type="submit" class="button submit-personal-info"> Update </button>
                     <button class="button change-password"> Change Password </button>
                 </fieldset>
             </form>
             <form class="company-info" name="company">
                 <fieldset class="company-section" name="company">
+                    <p class="fineprint"> You may only be part of 1 Company at a time. Joining/Creating a new company will remove you from your former</p>
                     <p class="input-label">
                         <label for="company-name">Company Name: </label>
                         <input name="company-name" type="text" placeholder="<?= htmlspecialchars($companies["company_name"] ?? "company name") ?>" required disabled>
@@ -145,34 +146,35 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 'true') {
                 </fieldset>
             </form>
             <dialog class="company-select">
-                <form name="company-select">
-                    <i class="bx bxs-x-circle" id="company-select-close"></i>
-
-
-                </form>
+                <i class="bx bxs-x-circle" id="company-select-close"></i>
+                <div class="react company-select-div"></div>
             </dialog>
 
             <dialog class="company-edit">
                 <i class="bx bxs-x-circle" id="company-edit-close"></i>
                 
-                <form name="company-edit-form">
+                <form class="company-edit-form" name="company-edit-form">
                     <p class="input-label">
-                        <label for="company-name">Company Name: </label>
-                        <input name="company-name" type="text" placeholder="<?= htmlspecialchars($companies["company_name"] ?? "company name") ?>" required>
+                        <label for="companyName">Company Name: </label>
+                        <input name="companyName" type="text" placeholder="<?= htmlspecialchars($companies["company_name"] ?? "company name") ?>" required>
                     </p>
                     <p class="input-label">
-                        <label for="company-email">Company Email: </label>
-                        <input name="company-email" type="text" placeholder="<?= htmlspecialchars($companies["company_email"] ?? "company email") ?>" required>
+                        <label for="companyEmail">Company Email: </label>
+                        <input name="companyEmail" type="text" placeholder="<?= htmlspecialchars($companies["company_email"] ?? "company email") ?>" required>
                     </p>
                     <p class="input-label">
-                        <label for="company-phoneNumber">Company Phone Number: </label>
-                        <input name="company-phoneNumber" type="tel" placeholder="<?= htmlspecialchars($companies["company_phone_number"] ?? "company phone number") ?>" required>
+                        <label for="companyPhoneNumber">Company Phone Number: </label>
+                        <input name="companyPhoneNumber" type="tel" placeholder="<?= htmlspecialchars($companies["company_phone_number"] ?? "company phone number") ?>" required>
                     </p>
 
                     <p class="input-label">
-                        <label for="company-password">Password(Optional): </label>
-                        <input name="company-password" type="Password" placeholder="password(encrypted)">
+                        <label for="companyPassword">Password(Optional): </label>
+                        <p class="fineprint">Enter Password for Restricted Access, otherwise leave blank</p>
+                        <input name="companyPassword" type="Password" placeholder="password(encrypted)">
                     </p>
+
+                    <div class="react edit-error"></div>
+                    <div class="react edit-success"></div>
 
                     <button type="submit">Update</button>
                     
@@ -200,11 +202,12 @@ if (isset($_GET['ajax']) && $_GET['ajax'] == 'true') {
 
                     <p class="input-label">
                         <label for="companyPassword">Password(Optional): </label>
-                        <p id="fineprint">Enter Password for Restricted Access, otherwise leave blank</p>
+                        <p class="fineprint">Enter Password for Restricted Access, otherwise leave blank</p>
                         <input name="companyPassword" type="Password" placeholder="password(encrypted)">
                     </p>
 
                     <div class="react create-error"></div>
+                    <div class="react create-success"></div>
                     
 
                     <button type="submit">Create</button>

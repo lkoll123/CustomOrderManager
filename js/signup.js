@@ -7,7 +7,6 @@ root.render(<p>Hello WOrld!</p>)
 
 const validation = new JustValidate("#signUp");
 
-console.log("fuck you")
 
 validation
   .addField("#firstName", [

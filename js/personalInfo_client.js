@@ -81,7 +81,11 @@ $(document).ready(function() {
                 data: JSON.stringify(formData),
                 success: function(response) {
                     console.log('User information updated successfully:', response);
-                    // Optionally, handle UI updates here
+                    const successResponse = (
+                        <p className="success-message">Successfully updated profile!</p>
+                    );
+                    const root = ReactDOM.createRoot(document.querySelector('.personal-success'));
+                    root.render(successResponse);
                 },
                 error: function(error) {
                     console.error('Error updating user information:', error);
@@ -106,17 +110,18 @@ $(document).ready(function() {
             event.preventDefault(); // Prevent default form submission
             
             const formData = {
-                companyName: $('input[name="companyName"]').val(),
-                companyEmail: $('input[name="companyEmail"]').val(),
-                companyPhoneNumber: $('input[name="companyPhoneNumber"]').val(),
-                passwordHash: $('input[name="companyPassword"]').val(),
+                companyName: $('.company-create-form input[name="companyName"]').val(),
+                companyEmail: $('.company-create-form input[name="companyEmail"]').val(),
+                companyPhoneNumber: $('.company-create-form input[name="companyPhoneNumber"]').val(),
+                passwordHash: '',
                 userId: currData.id
             };
+            
+            const password = $('.company-create-form input[name="companyPassword"]').val();
+
+            console.log($('input[name="companyName"]').val())
+
             console.log(formData);
-
-            const password = $('input[name="companyPassword"]').val();
-
-            console.log(password);
             if (password) {
                 if (!confirmPassword(password)) {
                      // Save React data
@@ -127,41 +132,45 @@ $(document).ready(function() {
                     root.render(invalidResponse);
                     console.log('Password validation failed');
                 } else {
-                    const saltRounds = 10;
-                    bcrypt.hash(password, saltRounds, function(err, hash) {
-                        if (err) {
-                            console.error("Error hashing password:", err);
-                            return;
-                        }
-                        formData.passwordHash = hash;
+                    const hashedPassword = CryptoJS.SHA256(password).toString();
+                    formData.passwordHash = hashedPassword;
 
-                        $.ajax({
-                            url: 'http://localhost:3000/update-user',
-                            method: 'POST',
-                            contentType: 'application/json',
-                            data: JSON.stringify(formData),
-                            success: (res) => {
-                                console.log('Create Company Successful:', res);
-                            },
-                            error: (error) => {
-                                console.error('Error occurred updating database:', error);
-                                const errorResponse = (
-                                    <p className="error-message">Error Updating Info: Email may already exist</p>
-                                );
-                                const root = ReactDOM.createRoot(document.querySelector('.company-create'));
-                                root.render(errorResponse);
-                            }
-                        });
+                    $.ajax({
+                        url: 'http://localhost:3000/create-company',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: (res) => {
+                            console.log('Create Company Successful:', res);
+                            const successResponse = (
+                                <p className="success-message">Successfully created company!</p>
+                            );
+                            const root = ReactDOM.createRoot(document.querySelector('.create-success'));
+                            root.render(successResponse);
+                        },
+                        error: (error) => {
+                            console.error('Error occurred updating database:', error);
+                            const errorResponse = (
+                                <p className="error-message">Error Updating Info: Email already exists</p>
+                            );
+                            const root = ReactDOM.createRoot(document.querySelector('.create-error'));
+                            root.render(errorResponse);
+                        }
                     });
                 }
             } else {
                 $.ajax({
-                    url: 'http://localhost:3000/update-user',
+                    url: 'http://localhost:3000/create-company',
                     method: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify(formData),
                     success: (res) => {
                         console.log('Create Company Successful:', res);
+                        const successResponse = (
+                            <p className="success-message">Successfully created company!</p>
+                        );
+                        const root = ReactDOM.createRoot(document.querySelector('.create-success'));
+                        root.render(successResponse);
                     },
                     error: (error) => {
                         console.error('Error occurred updating database:', error);
@@ -178,6 +187,245 @@ $(document).ready(function() {
         // Re-render React components if modal was open
         
     }
+
+    const company_edit_form = document.querySelector('.company-edit-form');
+    if(company_edit_form) {
+        company_edit_form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const formData = {
+                companyName: $('input[name="companyName"]').val(),
+                companyEmail: $('input[name="companyEmail"]').val(),
+                companyPhoneNumber: $('input[name="companyPhoneNumber"]').val(),
+                passwordHash: '',
+                userId: currData.id,
+                companyId: currData.company_id
+            };
+            
+
+            const password = $('input[name="companyPassword"]').val();
+
+            console.log(formData);
+            if (password) {
+                if (!confirmPassword(password)) {
+                     // Save React data
+                    const root = ReactDOM.createRoot(document.querySelector('.edit-error'));
+                    const invalidResponse = (
+                        <p className="error-message">Password must be 8 characters long, and contain lowercase, uppercase, and digit characters</p>
+                    );
+                    root.render(invalidResponse);
+                    console.log('Password validation failed');
+                } else {
+                    const hashedPassword = CryptoJS.SHA256(password).toString();
+                    formData.passwordHash = hashedPassword;
+
+                    $.ajax({
+                        url: 'http://localhost:3000/edit-company',
+                        method: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(formData),
+                        success: (res) => {
+                            console.log('Edit Company Successful:', res);
+                            const successResponse = (
+                                <p className="success-message">Successfully updated company!</p>
+                            );
+                            const root = ReactDOM.createRoot(document.querySelector('.edit-success'));
+                            root.render(successResponse);
+                        },
+                        error: (error) => {
+                            console.error('Error occurred updating database:', error);
+                            const errorResponse = (
+                                <p className="error-message">Error Updating Info: Email already exists</p>
+                            );
+                            const root = ReactDOM.createRoot(document.querySelector('.edit-error'));
+                            root.render(errorResponse);
+                        }
+                    });
+                }
+            } else {
+                $.ajax({
+                    url: 'http://localhost:3000/edit-company',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(formData),
+                    success: (res) => {
+                        console.log('Edit Company Successful:', res);
+                        const successResponse = (
+                            <p className="success-message">Successfully updated company!</p>
+                        );
+                        const root = ReactDOM.createRoot(document.querySelector('.edit-success'));
+                        root.render(successResponse);
+                    },
+                    error: (error) => {
+                        console.error('Error occurred updating database:', error);
+                        const errorResponse = (
+                            <p className="error-message">Error Updating Info: Email already exists</p>
+                        );
+                        const root = ReactDOM.createRoot(document.querySelector('.edit-error'));
+                        root.render(errorResponse);
+                    }
+                });
+            }
+        })
+    }
+
+
+
+    
+    async function renderJoinData() {
+        try {
+            // Fetch the data
+            const response = await $.ajax({
+                url: 'http://localhost:3000/query-companies',
+                method: 'GET',
+                data: { ajax: 'true' },
+                dataType: 'json'
+            });
+            console.log(response);
+    
+            // Save the response data
+            const join_company_data = response;
+    
+            // Ensure the element exists
+            const join_form = document.querySelector(".react.company-select-div");
+            if (!join_form) {
+                console.error('Element with class .react.company-select not found');
+                return;
+            }
+    
+            // Create a React root and render the data
+            const root = ReactDOM.createRoot(join_form);
+    
+            // Define the React component
+            const FormDataList = () => {
+                const [selectedCompanyId, setSelectedCompanyId] = React.useState(null);
+                const [passwordRequired, setPasswordRequired] = React.useState(false);
+
+                const passwordInputRef = React.useRef(null);
+            
+                // Handle the change in the select element
+                const handleSelectChange = (event) => {
+                    const companyId = event.target.value;
+                    setSelectedCompanyId(companyId);
+                    const currCompany = join_company_data.find((company) => company.id == companyId);
+                    console.log(currCompany);
+                    setPasswordRequired(currCompany ? currCompany.password_required : false);
+                };
+            
+                // Handle form submission
+                const handleSubmit = (event) => {
+                    event.preventDefault();
+                    console.log('Selected Company ID:', selectedCompanyId);
+                    const companyId = selectedCompanyId;
+                    const formData = {
+                        userId: currData.id,
+                        companyId: selectedCompanyId,
+                        companyName: join_company_data.find((company) => company.id == companyId).company_name
+                    }
+                    if (passwordRequired) {
+                        const password = passwordInputRef.current.value;
+                        const hashedPassword = CryptoJS.SHA256(password).toString();
+                        const actualHashedPassword = join_company_data.find((company) => company.id == companyId).password;
+                        if (hashedPassword === actualHashedPassword) {
+                            $.ajax({
+                                url: 'http://localhost:3000/join-company',
+                                method: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify(formData),
+                                success: (res) => {
+                                    console.log('Edit Company Successful:', res);
+                                    const successResponse = (
+                                        <p className="success-message">Successfully joined company!</p>
+                                    );
+                                    const root = ReactDOM.createRoot(document.querySelector('.join-success'));
+                                    root.render(successResponse);
+                                },
+                                error: (error) => {
+                                    console.error('Error occurred updating database:', error);
+                                    
+                                }
+                            });
+                        } else {
+                            const errorResponse = (
+                                <p className="error-message">Failed to join company: Incorrect password</p>
+                            );
+                            const root = ReactDOM.createRoot(document.querySelector('.join-error'));
+                            root.render(errorResponse);
+                        }
+
+                    } else {
+                        $.ajax({
+                            url: 'http://localhost:3000/join-company',
+                            method: 'POST',
+                            contentType: 'application/json',
+                            data: JSON.stringify(formData),
+                            success: (res) => {
+                                console.log('Edit Company Successful:', res);
+                                const successResponse = (
+                                    <p className="success-message">Successfully joined company!</p>
+                                );
+                                const root = ReactDOM.createRoot(document.querySelector('.join-success'));
+                                root.render(successResponse);
+                            },
+                            error: (error) => {
+                                console.error('Error occurred updating database:', error);
+                                
+                            }
+                        });
+                    }
+
+                    
+                    // You can now use `selectedCompanyId` for further actions, like sending it to the server
+                    // For example, you might send an AJAX request or update some other state
+                };
+            
+                const join_company_elements = join_company_data.map((company) => {
+                    const optionContent = `${company.company_name} (Company Id: ${company.id})`;
+                    return <option key={company.id} value={company.id}>{optionContent}</option>;
+                });
+            
+                return (
+                    <form onSubmit={handleSubmit} className="company-select-form">
+                        <p className="input-label">
+                            <label htmlFor="joinSelect" className="input-label">Choose Company: </label>
+                            <select name="joinSelect" className="join-select" onChange={handleSelectChange}>
+                                <option value="">Select a company</option>
+                                {join_company_elements}
+                            </select>
+                        </p>
+                        
+            
+                        {passwordRequired && (
+                            <p className="input-label">
+                                <label htmlFor="companyPassword">Company Password: </label>
+                                <input name="companyPassword" type="password" placeholder="password(encrypted)" ref={passwordInputRef} required/>
+                            </p>
+                        )}
+
+                        <div className="react join-error"></div>
+                        <div className="react join-success"></div>
+                        
+                        <button type="submit">Join</button>
+                    </form>
+                );
+            };
+            
+            // Render the component
+            root.render(<FormDataList />);
+            
+    
+        } catch (error) {
+            console.error('AJAX request failed:', error);
+        }
+    }
+    
+    // Call the function to fetch the data
+    renderJoinData();
+    
+    
+
+    
+
+
 
     
     

@@ -44,8 +44,15 @@ hr {
 
 }
 
-.react {
+.error-message {
     color: red;
+    font-size: 12px;
+    font-family: 'Futura', Sans-serif;
+    margin-left: 5px;
+}
+
+.success-message {
+    color: green;
     font-size: 12px;
     font-family: 'Futura', Sans-serif;
     margin-left: 5px;
@@ -75,6 +82,7 @@ button {
     border: 2px solid white;
     border-radius: 30px;
     padding: 5px;
+    font-size: 14px;
 
     margin: 10px 10px 10px 10px;
 
@@ -110,19 +118,22 @@ input:hover {
     border-radius: 10px;
     filter: drop-shadow(10px 10px 4px rgba(68, 65, 65, 0.6));
     font-family: 'Futura', Sans-serif;
+
+    overflow: scroll;
     
 }
 
 .company-section {
     margin: 50px 120px;
     width: 45%;
-    height: 435px;
+    height: 450px;
 
     background-color: #1A093D;
     border-color:  rgba(68, 65, 65, 0.6);
     border-radius: 10px;
     filter: drop-shadow(10px 10px 4px rgba(68, 65, 65, 0.6));
     font-family: 'Futura', Sans-serif;
+    overflow: scroll;
 }
 
 
@@ -135,7 +146,7 @@ input:hover {
     }
 }
 
-.company-edit, .company-create {
+.company-edit, .company-create, .company-select {
     width: 45%;
     height: 450px;
 
@@ -148,6 +159,8 @@ input:hover {
     position: abolute;
     left: 20%;
     top: 20%;
+
+    overflow: scroll;
     
 }
 
@@ -162,7 +175,7 @@ input:hover {
 
 }
 
-#fineprint {
+.fineprint {
     display: block;
     margin-left: 10px;
 
@@ -178,8 +191,32 @@ input:hover {
     background: rgba(68, 65, 65, 0.6);
 }
 
+.company-select::backdrop {
+    background: rgba(68, 65, 65, 0.6);
+}
+
 .company-create::backdrop {
     background: rgba(68, 65, 65, 0.6);
+}
+
+.join-select {
+    width: 80%;
+    padding: 8px;
+    margin-left: 10%;
+    border: 2px solid #ccc;
+    background-color: rgba(68, 65, 65, 0);
+    color: #fff;
+    border-radius: 30px;
+    font-family: 'Futura', Sans-serif;
+    font-size: 15px;
+}
+.join-select::after {
+    content: '▼'; /* Custom down arrow */
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
 }
 
 @media only screen and (min-width: 800px) and (max-width: 1000px){
