@@ -13,12 +13,21 @@ if(isset($_SESSION["user_id"])) {
 
     $sql = "SELECT * FROM user
                 WHERE id = {$_SESSION["user_id"]}";
+                
 
     $result = $mysqli->query($sql);
 
     $user = $result->fetch_assoc();
 
 
+}
+
+// Check if the request is an AJAX request
+if (isset($_GET['ajax']) && $_GET['ajax'] == 'true') {
+    // Return session data as JSON
+    header('Content-Type: application/json');
+    echo json_encode($user);
+    exit(); // Ensure no further HTML is output
 }
 
 
@@ -39,11 +48,14 @@ if(isset($_SESSION["user_id"])) {
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel="stylesheet" />
 
         <link href="../../stylesheet/sideBar.css" type="text/css" rel="stylesheet"/>
+        <link href="../../stylesheet/settings.css" type="text/css" rel="stylesheet"/>
 
         <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
         <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <script src="/Applications/XAMPP/xamppfiles/htdocs/Daniel_Summer_Proj_2024/js/landingScreen.js"></script>
+        <script type="text/babel" src="../../js/settings_client.js"></script>
     </head>
 
     <body>
@@ -111,9 +123,18 @@ if(isset($_SESSION["user_id"])) {
         </div>
         
         <div class="main-content">
-            <div class="container">
-                <h1>Mirai Solutions </h1>
+            <div class="title-section">
+                <img src="../../images/settingsIcon.jpg" alt="profile image" id="headImage"></img>
+                <h1> Settings </h1>
+                
             </div>
+            <hr>
+            <div class="authentication">
+                <h1> Click here to Authenticate</h1>
+                <p class="warning">*authentication gmail must match your account gmail</p>
+                <button class="authenticate">Authenticate</button>
+            </div>
+            
         </div>
         
                 
